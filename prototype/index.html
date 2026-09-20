@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mehmet Can — Masamdan Merhaba</title>
+  <meta name="description" content="Bilgisayar mühendisi ve yazılım geliştirici Mehmet Can'ın etkileşimli portfolyo sitesi. Masamı karıştır, projelerime göz at.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scene" id="scene">
+
+  <!-- ÜST ÇUBUK -->
+  <header class="topbar">
+    <a class="logo" href="#" aria-label="Ana sayfa">
+      <i>&lt;/&gt;</i><span id="logoName">mehmet can</span>
+    </a>
+    <div class="timebox">
+      <label for="time"><span aria-hidden="true">🕒</span> <output id="timeOut">12:00</output></label>
+      <input id="time" type="range" min="0" max="1439" step="1" aria-label="Günün saatini değiştir">
+      <button id="nowBtn" type="button" title="Gerçek saate dön">şimdi</button>
+    </div>
+  </header>
+
+  <!-- DUVAR -->
+  <main class="wall">
+    <div class="lights" id="lights" aria-hidden="true">
+      <svg viewBox="0 0 100 60" preserveAspectRatio="none"><path id="wire" vector-effect="non-scaling-stroke"/></svg>
+    </div>
+
+    <section class="hero">
+      <p class="eyebrow" id="greet">Merhaba 👋</p>
+      <h1>Ben <span class="name">Mehmet Can</span>,<br>bilgisayar mühendisi.</h1>
+      <p class="typed-line">Geliştirdiğim şeyler: <span class="typed" id="typed"></span><span class="caret" aria-hidden="true"></span></p>
+      <p class="intro" id="intro"></p>
+      <div class="ctas">
+        <button class="btn primary cta" data-open="projects" type="button">Projelerime bak</button>
+        <button class="btn ghost cta" data-open="contact" type="button">Bana yaz</button>
+      </div>
+      <p class="hint" aria-hidden="true">
+        aşağıdaki her şey tıklanıyor
+        <svg viewBox="0 0 60 50" width="46" height="38"><path d="M8 4 C 40 2, 52 20, 30 44 M30 44 L28 30 M30 44 L42 38" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </p>
+    </section>
+
+    <svg class="wallclock" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="46" fill="#fff8ec" stroke="#2b2233" stroke-width="5"/>
+      <g stroke="#2b2233" stroke-width="4" stroke-linecap="round">
+        <path d="M50 10v6M50 84v6M10 50h6M84 50h6"/>
+      </g>
+      <line id="handH" x1="50" y1="50" x2="50" y2="28" stroke="#2b2233" stroke-width="5" stroke-linecap="round"/>
+      <line id="handM" x1="50" y1="50" x2="50" y2="16" stroke="#2b2233" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="50" cy="50" r="4" fill="#ff6b4a"/>
+    </svg>
+
+    <div class="window" id="window" aria-hidden="true">
+      <div class="sky" id="sky">
+        <div class="sun" id="sun"></div>
+        <div class="moon" id="moon"></div>
+        <div class="cloud c1"></div>
+        <div class="cloud c2"></div>
+        <svg class="skyline" viewBox="0 0 200 60" preserveAspectRatio="none">
+          <g fill="rgba(40,30,80,.42)">
+            <path d="M0 60V38Q20 22 42 36T86 34Q110 24 130 38T200 30V60Z"/>
+          </g>
+          <g fill="rgba(30,22,64,.7)">
+            <rect x="6" y="34" width="16" height="26"/><rect x="26" y="26" width="14" height="34"/>
+            <rect x="44" y="38" width="18" height="22"/><rect x="70" y="22" width="15" height="38"/>
+            <rect x="90" y="32" width="20" height="28"/><rect x="118" y="28" width="14" height="32"/>
+            <rect x="138" y="36" width="18" height="24"/><rect x="162" y="24" width="16" height="36"/>
+            <rect x="182" y="34" width="14" height="26"/>
+          </g>
+          <g fill="#ffd76a" class="lit">
+            <rect x="10" y="40" width="3" height="3"/><rect x="30" y="32" width="3" height="3"/><rect x="30" y="42" width="3" height="3"/>
+            <rect x="74" y="28" width="3" height="3"/><rect x="74" y="40" width="3" height="3"/><rect x="96" y="38" width="3" height="3"/>
+            <rect x="122" y="34" width="3" height="3"/><rect x="144" y="42" width="3" height="3"/><rect x="166" y="30" width="3" height="3"/>
+            <rect x="166" y="42" width="3" height="3"/><rect x="186" y="40" width="3" height="3"/>
+          </g>
+        </svg>
+      </div>
+      <i class="bar-v"></i><i class="bar-h"></i>
+      <div class="sill"></div>
+    </div>
+  </main>
+
+  <!-- MASA -->
+  <section class="desk" id="desk" aria-label="Masam — nesnelere tıklayabilirsin">
+    <div class="desk-inner" id="deskInner">
+
+      <!-- Defter: Hakkımda -->
+      <button class="item" data-open="about" type="button" aria-label="Defter — Hakkımda"
+              style="--x:15%;--y:7%;--w:11;--r:-6deg;--z:14">
+        <span class="item-in">
+          <svg viewBox="0 0 150 196" aria-hidden="true">
+            <ellipse class="shadow" cx="76" cy="190" rx="62" ry="6"/>
+            <rect x="8" y="8" width="134" height="176" rx="10" fill="#ff6b4a"/>
+            <rect x="8" y="8" width="22" height="176" rx="10" fill="#e14f30"/>
+            <g fill="#fff3dc"><circle cx="19" cy="34" r="4"/><circle cx="19" cy="64" r="4"/><circle cx="19" cy="94" r="4"/><circle cx="19" cy="124" r="4"/><circle cx="19" cy="154" r="4"/></g>
+            <rect x="116" y="8" width="8" height="176" fill="#b73b22" opacity=".55"/>
+            <g transform="rotate(-3 82 80)">
+              <rect x="40" y="48" width="74" height="64" rx="6" fill="#fff3dc"/>
+              <text x="77" y="86" class="hand" font-size="27" text-anchor="middle" fill="#2b2233">hakkımda</text>
+              <path d="M52 96 Q77 104 102 94" fill="none" stroke="#ff6b4a" stroke-width="3" stroke-linecap="round"/>
+            </g>
+            <path d="M92 140 l4 9 9 1 -7 6 2 9 -8 -5 -8 5 2 -9 -7 -6 9 -1z" fill="#ffc857"/>
+          </svg>
+          <span class="tag">hakkımda</span>
+        </span>
+      </button>
+
+      <!-- Yapışkan not: Yetenekler -->
+      <button class="item" data-open="skills" type="button" aria-label="Yapışkan notlar — Yetenekler"
+              style="--x:27.5%;--y:5%;--w:8.5;--r:-4deg;--z:15">
+        <span class="item-in">
+          <svg viewBox="0 0 132 132" aria-hidden="true">
+            <ellipse class="shadow" cx="66" cy="124" rx="48" ry="5"/>
+            <g transform="rotate(9 76 66)"><rect x="42" y="12" width="78" height="78" fill="#ff9ecb"/></g>
+            <g transform="rotate(-6 56 76)">
+              <rect x="8" y="30" width="86" height="86" fill="#ffe27a"/>
+              <rect x="30" y="22" width="34" height="12" fill="rgba(255,255,255,.65)"/>
+              <text x="51" y="70" class="hand" font-size="26" text-anchor="middle" fill="#2b2233">yetenek</text>
+              <text x="51" y="94" class="hand" font-size="26" text-anchor="middle" fill="#2b2233">listem ✦</text>
+            </g>
+          </svg>
+          <span class="tag">yetenekler</span>
+        </span>
+      </button>
+
+      <!-- Laptop: Projeler -->
+      <button class="item" data-open="projects" type="button" aria-label="Laptop — Projelerim"
+              style="--x:34%;--y:30%;--w:24;--r:0deg;--z:8">
+        <span class="item-in">
+          <svg viewBox="0 0 240 150" aria-hidden="true">
+            <ellipse class="shadow" cx="120" cy="142" rx="112" ry="6"/>
+            <rect x="34" y="4" width="172" height="112" rx="9" fill="#2f2b45"/>
+            <rect x="42" y="12" width="156" height="96" rx="4" fill="#191727"/>
+            <circle cx="50" cy="20" r="2.4" fill="#ff6b6b"/><circle cx="58" cy="20" r="2.4" fill="#ffc857"/><circle cx="66" cy="20" r="2.4" fill="#4cd39b"/>
+            <g class="code">
+              <rect style="--i:0" x="50" y="34" width="34" height="5" rx="2.5" fill="#ff8fab"/><rect style="--i:0" x="88" y="34" width="52" height="5" rx="2.5" fill="#8be9fd"/>
+              <rect style="--i:1" x="58" y="46" width="60" height="5" rx="2.5" fill="#f1fa8c"/><rect style="--i:1" x="122" y="46" width="30" height="5" rx="2.5" fill="#bd93f9"/>
+              <rect style="--i:2" x="58" y="58" width="44" height="5" rx="2.5" fill="#50fa7b"/><rect style="--i:2" x="106" y="58" width="58" height="5" rx="2.5" fill="#8be9fd"/>
+              <rect style="--i:3" x="66" y="70" width="70" height="5" rx="2.5" fill="#ff8fab"/>
+              <rect style="--i:4" x="58" y="82" width="38" height="5" rx="2.5" fill="#f1fa8c"/><rect style="--i:4" x="100" y="82" width="46" height="5" rx="2.5" fill="#bd93f9"/>
+              <rect class="caret-svg" x="50" y="94" width="6" height="8" fill="#fff"/>
+            </g>
+            <path d="M14 116H226L232 128Q233 136 224 136H16Q7 136 8 128Z" fill="#cfcbe0"/>
+            <rect x="100" y="116" width="40" height="6" rx="3" fill="#b3aecb"/>
+          </svg>
+          <span class="tag">projelerim</span>
+        </span>
+      </button>
+
+      <!-- Polaroid: Yolculuk -->
+      <button class="item" data-open="journey" type="button" aria-label="Fotoğraf — Yolculuğum"
+              style="--x:50.5%;--y:7%;--w:9.5;--r:7deg;--z:16">
+        <span class="item-in">
+          <svg viewBox="0 0 130 164" aria-hidden="true">
+            <ellipse class="shadow" cx="66" cy="158" rx="50" ry="5"/>
+            <rect x="6" y="6" width="118" height="146" rx="4" fill="#fffdf6" stroke="#e7dcc7"/>
+            <rect x="16" y="16" width="98" height="98" fill="#8fd3f4"/>
+            <circle cx="98" cy="34" r="10" fill="#ffd95a"/>
+            <path d="M16 114V88Q40 72 62 90T114 84V114Z" fill="#5ec48a"/>
+            <path d="M65 40L108 58 65 76 22 58Z" fill="#2b2233"/>
+            <path d="M42 68V88Q65 100 88 88V68L65 78Z" fill="#3d3654"/>
+            <path d="M104 60V86" stroke="#ffc857" stroke-width="3" stroke-linecap="round"/><circle cx="104" cy="90" r="4.5" fill="#ffc857"/>
+            <text x="65" y="140" class="hand" font-size="22" text-anchor="middle" fill="#2b2233">yolculuğum</text>
+          </svg>
+          <span class="tag">yolculuk</span>
+        </span>
+      </button>
+
+      <!-- Kahve -->
+      <button class="item extra" data-action="coffee" type="button" aria-label="Kahve fincanı"
+              style="--x:62.5%;--y:23%;--w:7.5;--r:0deg;--z:12">
+        <span class="item-in" id="mug">
+          <svg viewBox="0 -24 124 154" aria-hidden="true">
+            <ellipse class="shadow" cx="58" cy="122" rx="44" ry="6"/>
+            <g class="steam">
+              <path d="M44 28C36 18 46 10 40 0" style="--d:0s"/>
+              <path d="M58 28C50 16 62 8 54 -4" style="--d:.9s"/>
+              <path d="M72 28C64 18 74 10 68 0" style="--d:1.8s"/>
+            </g>
+            <path d="M92 54H100Q116 54 116 72Q116 90 96 90" fill="none" stroke="#4cc9a4" stroke-width="9" stroke-linecap="round"/>
+            <path d="M18 40H94V88Q94 118 56 118Q18 118 18 88Z" fill="#4cc9a4"/>
+            <ellipse cx="56" cy="40" rx="38" ry="9" fill="#3aa886"/>
+            <ellipse cx="56" cy="41" rx="32" ry="6" fill="#5b3a29"/>
+            <text x="56" y="90" text-anchor="middle" fill="#fff" font-size="26" font-family="Fredoka, sans-serif" font-weight="600">{ }</text>
+          </svg>
+          <span class="tag">kahve</span>
+        </span>
+      </button>
+
+      <!-- Telefon: İletişim -->
+      <button class="item" data-open="contact" type="button" aria-label="Telefon — İletişim"
+              style="--x:72.5%;--y:9%;--w:6;--r:12deg;--z:13">
+        <span class="item-in">
+          <svg viewBox="0 0 90 172" aria-hidden="true">
+            <ellipse class="shadow" cx="46" cy="166" rx="34" ry="4"/>
+            <rect x="6" y="6" width="78" height="158" rx="14" fill="#2b2740"/>
+            <rect x="11" y="12" width="68" height="146" rx="10" fill="#6d5ae6"/>
+            <rect x="34" y="16" width="22" height="5" rx="2.5" fill="#2b2740"/>
+            <g class="bubble b1"><rect x="18" y="44" width="54" height="26" rx="8" fill="#fff"/><rect x="24" y="51" width="34" height="4" rx="2" fill="#c6bff5"/><rect x="24" y="59" width="22" height="4" rx="2" fill="#e2defa"/></g>
+            <g class="bubble b2"><rect x="18" y="78" width="54" height="26" rx="8" fill="#ffe9a8"/><rect x="24" y="85" width="30" height="4" rx="2" fill="#e8c96a"/><rect x="24" y="93" width="38" height="4" rx="2" fill="#f3dc95"/></g>
+            <circle cx="68" cy="44" r="8" fill="#ff6b4a"/><text x="68" y="48" text-anchor="middle" fill="#fff" font-size="11" font-weight="800">1</text>
+            <circle cx="45" cy="134" r="15" fill="#fff"/><text x="45" y="141" text-anchor="middle" fill="#6d5ae6" font-size="20" font-weight="800">@</text>
+          </svg>
+          <span class="tag">bana yaz</span>
+        </span>
+      </button>
+
+      <!-- Kedi -->
+      <button class="item extra" id="cat" data-action="cat" type="button" aria-label="Kedi"
+              style="--x:83.5%;--y:29%;--w:12.5;--r:0deg;--z:9">
+        <span class="item-in">
+          <svg viewBox="0 0 160 172" id="catSvg" aria-hidden="true">
+            <ellipse class="shadow" cx="80" cy="166" rx="56" ry="6"/>
+            <path class="tail" d="M118 152C156 152 160 112 140 100" fill="none" stroke="#f0a04b" stroke-width="13" stroke-linecap="round"/>
+            <ellipse cx="80" cy="124" rx="46" ry="42" fill="#f4a94e"/>
+            <ellipse cx="80" cy="134" rx="26" ry="30" fill="#ffe2b8"/>
+            <ellipse cx="60" cy="162" rx="14" ry="8" fill="#ffe2b8"/><ellipse cx="100" cy="162" rx="14" ry="8" fill="#ffe2b8"/>
+            <path d="M46 48L42 12L72 33Z" fill="#f4a94e"/><path d="M50 42L48 24L63 34Z" fill="#ffb3b3"/>
+            <path d="M114 48L118 12L88 33Z" fill="#f4a94e"/><path d="M110 42L112 24L97 34Z" fill="#ffb3b3"/>
+            <ellipse cx="80" cy="66" rx="41" ry="35" fill="#f4a94e"/>
+            <path d="M70 36V46M80 34V46M90 36V46" stroke="#d9822b" stroke-width="3" stroke-linecap="round"/>
+            <g class="awake">
+              <ellipse class="eye-w" cx="64" cy="66" rx="9" ry="10.5" fill="#fff8e0"/><ellipse class="eye-w" cx="96" cy="66" rx="9" ry="10.5" fill="#fff8e0"/>
+              <circle class="pupil" cx="64" cy="66" r="5.2" fill="#2b2233"/><circle class="pupil" cx="96" cy="66" r="5.2" fill="#2b2233"/>
+            </g>
+            <g class="asleep" fill="none" stroke="#2b2233" stroke-width="3" stroke-linecap="round">
+              <path d="M54 68Q64 76 74 68"/><path d="M86 68Q96 76 106 68"/>
+            </g>
+            <path d="M76 78H84L80 83Z" fill="#ff7f8e"/>
+            <path d="M80 83Q75 90 69 86M80 83Q85 90 91 86" fill="none" stroke="#6b3b1f" stroke-width="2" stroke-linecap="round"/>
+            <g stroke="#fff8ec" stroke-width="1.8" stroke-linecap="round" opacity=".9">
+              <path d="M52 80L28 76M52 85L28 90M108 80L132 76M108 85L132 90"/>
+            </g>
+            <text class="zzz hand" x="118" y="30" font-size="26" fill="#2b2233">z z z</text>
+          </svg>
+          <span class="tag">mırmır</span>
+        </span>
+      </button>
+
+      <!-- Lamba -->
+      <button class="item extra" id="lamp" data-action="lamp" type="button" aria-label="Masa lambası (aç/kapat)"
+              style="--x:2%;--y:47%;--w:10.5;--r:0deg;--z:6">
+        <span class="item-in">
+          <svg viewBox="0 0 160 250" aria-hidden="true">
+            <ellipse class="shadow" cx="60" cy="243" rx="46" ry="6"/>
+            <path d="M18 240Q18 224 60 224Q102 224 102 240Z" fill="#4a4463"/>
+            <path d="M60 226L46 140L92 74" fill="none" stroke="#5a5378" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="46" cy="140" r="7" fill="#ffc857"/>
+            <g transform="rotate(-32 92 74)">
+              <path d="M70 58Q92 44 114 58L128 104H56Z" fill="#ffc857"/>
+              <path d="M70 58Q92 44 114 58L118 72Q92 60 66 72Z" fill="#ffdc7e"/>
+              <ellipse class="bulb" cx="92" cy="104" rx="36" ry="7" fill="#fff4b8"/>
+            </g>
+          </svg>
+          <span class="tag">ışık</span>
+        </span>
+      </button>
+
+      <!-- Bitki -->
+      <button class="item extra" id="plant" data-action="plant" type="button" aria-label="Saksı çiçeği"
+              style="--x:13.5%;--y:46%;--w:7.5;--r:0deg;--z:5">
+        <span class="item-in">
+          <svg viewBox="0 0 110 172" aria-hidden="true">
+            <ellipse class="shadow" cx="55" cy="167" rx="34" ry="4"/>
+            <g class="leaves">
+              <ellipse cx="55" cy="62" rx="12" ry="42" fill="#2f8f5b" transform="rotate(-42 55 108)"/>
+              <ellipse cx="55" cy="58" rx="13" ry="46" fill="#3fa66b" transform="rotate(-18 55 108)"/>
+              <ellipse cx="55" cy="54" rx="13" ry="50" fill="#57bd7c" transform="rotate(4 55 108)"/>
+              <ellipse cx="55" cy="60" rx="13" ry="44" fill="#3fa66b" transform="rotate(24 55 108)"/>
+              <ellipse cx="55" cy="66" rx="12" ry="38" fill="#2f8f5b" transform="rotate(44 55 108)"/>
+            </g>
+            <path d="M22 108H88L80 158Q79 165 72 165H38Q31 165 30 158Z" fill="#d9825b"/>
+            <rect x="18" y="102" width="74" height="12" rx="4" fill="#c46f49"/>
+          </svg>
+          <span class="tag">sula</span>
+        </span>
+      </button>
+
+    </div>
+
+    <span class="desk-note left">elle yapıldı, biraz da kahveyle ☕</span>
+    <button class="tidy-btn" id="tidyBtn" type="button">🧹 masayı topla</button>
+  </section>
+
+  <div class="glow" id="glow" aria-hidden="true"></div>
+</div>
+
+<!-- PENCERE (modal) -->
+<dialog class="modal" id="modal" aria-labelledby="modalTitle">
+  <div class="win">
+    <div class="win-bar">
+      <button class="dot red" type="button" data-close aria-label="Kapat"></button>
+      <i class="dot yellow"></i><i class="dot green"></i>
+      <span class="win-title" id="modalTitle"></span>
+    </div>
+    <div class="win-body" id="modalBody"></div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<noscript><p style="position:fixed;bottom:12px;left:12px;background:#fff8ec;padding:8px 12px;border-radius:8px">Bu site etkileşimli; JavaScript'i açman gerekiyor.</p></noscript>
+
+<script src="content.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
