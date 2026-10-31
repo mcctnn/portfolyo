@@ -1,4 +1,4 @@
-﻿/* ============ DeÄŸiÅŸkenler ============ */
+/* ============ DeÄŸiÅŸkenler ============ */
 :root {
   --u: min(1vw, 15px);
   --paper: #fff8ec;
@@ -493,3 +493,87 @@ button { font: inherit; color: inherit; }
 .notfound .big { margin: 0; font: 700 clamp(4rem, 14vw, 8rem)/1 var(--f-head); color: var(--coral); }
 .notfound h1 { margin: 0; font: 600 clamp(1.5rem, 4vw, 2.2rem) var(--f-head); }
 .notfound p { margin: 0 0 12px; color: #6a5b6e; }
+
+/* ============ Dil düğmesi ============ */
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.langbtn {
+  display: grid; place-items: center; min-width: 42px; height: 38px; padding: 0 12px;
+  border-radius: 999px; background: rgba(255, 248, 236, .88); color: #2b2233;
+  font: 800 .85rem var(--f-body); text-decoration: none; letter-spacing: .04em;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .12);
+  transition: transform .2s cubic-bezier(.3, 1.6, .5, 1), background .15s;
+}
+.langbtn:hover { transform: rotate(-3deg) scale(1.06); background: #fff; }
+.langbtn:focus-visible { outline: 3px dashed var(--coral); outline-offset: 3px; }
+@media (max-width: 760px) {
+  .topbar-right { width: 100%; }
+  .topbar-right .timebox { flex: 1; }
+  .topbar { flex-wrap: wrap; }
+}
+
+/* ============ Yıldız kayması ============ */
+.shoot {
+  position: absolute; left: 22%; top: 10%; width: 54px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #fff);
+  transform: rotate(28deg); opacity: 0; pointer-events: none;
+  animation: shoot 13s linear infinite 4s;
+}
+@keyframes shoot {
+  0%, 90% { opacity: 0; transform: translate(0, 0) rotate(28deg); }
+  91% { opacity: var(--dark); }
+  97% { opacity: 0; transform: translate(150px, 80px) rotate(28deg); }
+  100% { opacity: 0; transform: translate(150px, 80px) rotate(28deg); }
+}
+
+/* ============ Radyo ============ */
+.needle { transform-box: fill-box; transform-origin: center; }
+.needle.on { animation: tune 5s ease-in-out infinite; }
+@keyframes tune { 0%, 100% { transform: translateX(-16px); } 50% { transform: translateX(16px); } }
+.notes text { animation: notefloat 2.6s ease-out infinite; animation-delay: var(--d, 0s); opacity: 0; }
+@keyframes notefloat { 0% { opacity: 0; transform: translateY(8px); } 25% { opacity: 1; } 100% { opacity: 0; transform: translateY(-26px); } }
+
+/* ============ İletişim formu ============ */
+.contact-form { margin-top: 26px; padding-top: 20px; border-top: 2px dashed var(--m-card-line); display: grid; gap: 12px; }
+.contact-form h3 { margin: 0; font: 600 1.2rem var(--f-head); }
+.contact-form label { display: grid; gap: 5px; font-weight: 800; font-size: .9rem; }
+.contact-form .row2 { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.contact-form input, .contact-form textarea {
+  width: 100%; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--m-card-line);
+  background: var(--m-card); color: var(--m-ink); font: 600 1rem var(--f-body);
+}
+.contact-form textarea { resize: vertical; min-height: 110px; }
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--coral); box-shadow: 0 0 0 3px rgba(255, 107, 74, .2); }
+.contact-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.contact-form .btn { justify-self: start; }
+.contact-form .btn:disabled { opacity: .6; cursor: wait; }
+.form-error { margin: 0; padding: 9px 13px; border-radius: 12px; background: #ffe1da; color: #8a2a14; font-weight: 700; }
+.form-done { margin-top: 26px; padding: 18px; border-radius: 16px; background: rgba(76, 201, 164, .2); border: 2px solid #4cc9a4; display: grid; gap: 12px; justify-items: start; }
+.form-done p { margin: 0; font-weight: 800; }
+.win .btn.small { padding: 6px 14px; font-size: .85rem; }
+
+/* ============ Yazılar ============ */
+.muted { color: var(--m-soft); }
+.back { display: inline-block; margin-bottom: 14px; color: var(--coral); font-weight: 800; text-decoration: none; }
+.back:hover { text-decoration: underline; }
+.post-list { display: grid; gap: 12px; margin-top: 8px; }
+.post-card {
+  display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 16px; text-decoration: none; color: var(--m-ink);
+  background: var(--m-card); border: 2px solid var(--m-card-line); box-shadow: 0 5px 0 var(--m-card-line);
+  transition: transform .2s cubic-bezier(.3, 1.6, .5, 1), box-shadow .2s, border-color .2s;
+}
+.post-card:hover { transform: translateY(-3px) rotate(-.4deg); box-shadow: 0 8px 0 var(--m-card-line); border-color: var(--coral); }
+.post-card .emoji { font-size: 1.8rem; line-height: 1.2; }
+.post-card b { display: block; font: 600 1.2rem var(--f-head); }
+.post-card small { display: block; color: var(--m-soft); font-weight: 700; margin: 2px 0 6px; }
+.post-card .excerpt { display: block; color: var(--m-soft); }
+.post .meta { margin: -6px 0 18px; color: var(--m-soft); font-weight: 700; }
+.prose { line-height: 1.7; }
+.prose h2, .prose h3, .prose h4 { font-family: var(--f-head); font-weight: 600; margin: 1.6em 0 .5em; }
+.prose h2 { font-size: 1.5rem; } .prose h3 { font-size: 1.25rem; } .prose h4 { font-size: 1.1rem; }
+.prose ul, .prose ol { padding-left: 1.3em; margin: 0 0 12px; }
+.prose li { margin: 3px 0; }
+.prose a { color: var(--coral); font-weight: 800; }
+.prose code { padding: 2px 6px; border-radius: 6px; background: rgba(0, 0, 0, .08); font: 500 .9em ui-monospace, Consolas, monospace; }
+.prose pre { margin: 0 0 14px; padding: 14px 16px; border-radius: 12px; background: #1d1b2b; color: #ece9ff; overflow-x: auto; }
+.prose pre code { padding: 0; background: none; color: inherit; }
+.prose blockquote { margin: 0 0 14px; padding: 8px 16px; border-left: 4px solid var(--coral); background: rgba(255, 107, 74, .08); border-radius: 0 10px 10px 0; }

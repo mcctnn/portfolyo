@@ -37,6 +37,60 @@ export const CvArt = () => (
   </svg>
 );
 
+export const BlogArt = () => (
+  <svg viewBox="0 0 140 182" aria-hidden="true">
+    <ellipse className="shadow" cx="70" cy="176" rx="54" ry="5" />
+    <rect x="10" y="8" width="118" height="160" rx="9" fill="#5a7bff" />
+    <rect x="10" y="8" width="20" height="160" rx="9" fill="#3f5fe0" />
+    <rect x="98" y="8" width="8" height="160" fill="#2f48b8" opacity=".45" />
+    <rect x="42" y="38" width="62" height="52" rx="6" fill="#eef2ff" />
+    <text x="73" y="72" className="hand" fontSize="30" textAnchor="middle" fill="#2b2233">blog</text>
+    <path d="M52 80 Q73 87 94 78" fill="none" stroke="#5a7bff" strokeWidth="3" strokeLinecap="round" />
+    <g transform="rotate(32 100 130)">
+      <rect x="94" y="96" width="12" height="62" rx="3" fill="#ffc857" />
+      <rect x="94" y="96" width="12" height="9" rx="3" fill="#ff6b4a" />
+      <path d="M94 158 l6 13 6-13z" fill="#2b2233" />
+    </g>
+  </svg>
+);
+
+export const RadioArt = ({ on }) => (
+  <svg viewBox="0 -18 160 138" aria-hidden="true">
+    <ellipse className="shadow" cx="80" cy="116" rx="68" ry="5" />
+    <path d="M44 28 L112 -10" stroke="#8d8aa3" strokeWidth="3" strokeLinecap="round" />
+    <circle cx="112" cy="-10" r="4" fill="#8d8aa3" />
+    <rect x="8" y="26" width="144" height="86" rx="14" fill="#e6684c" />
+    <rect x="8" y="26" width="144" height="14" rx="7" fill="#f08a70" />
+    <circle cx="50" cy="74" r="26" fill="#2b2233" />
+    <circle cx="50" cy="74" r="19" fill="none" stroke="#6a5b86" strokeWidth="3" strokeDasharray="3 5" />
+    <rect x="86" y="52" width="54" height="20" rx="5" fill="#fff3dc" />
+    <path d="M92 66h42" stroke="#c9b99a" strokeWidth="2" strokeDasharray="2 4" />
+    <line className={on ? "needle on" : "needle"} x1="100" y1="54" x2="100" y2="70" stroke="#e6684c" strokeWidth="2.5" strokeLinecap="round" />
+    <circle cx="100" cy="94" r="8" fill="#fff3dc" /><circle cx="126" cy="94" r="8" fill="#fff3dc" />
+    {on && (
+      <g className="notes" fill="#fff" fontSize="22" fontWeight="800">
+        <text x="30" y="10" style={{ "--d": "0s" }}>♪</text>
+        <text x="62" y="4" style={{ "--d": ".8s" }}>♫</text>
+        <text x="130" y="-2" style={{ "--d": "1.6s" }}>♪</text>
+      </g>
+    )}
+  </svg>
+);
+
+export const BooksArt = () => (
+  <svg viewBox="0 0 130 92" aria-hidden="true">
+    <ellipse className="shadow" cx="65" cy="86" rx="52" ry="5" />
+    <rect x="8" y="58" width="112" height="24" rx="3" fill="#4cc9a4" />
+    <rect x="8" y="66" width="112" height="3" fill="rgba(255,255,255,.55)" />
+    <rect x="16" y="34" width="98" height="24" rx="3" fill="#ffc857" />
+    <rect x="16" y="42" width="98" height="3" fill="rgba(255,255,255,.55)" />
+    <g transform="rotate(-5 52 22)">
+      <rect x="6" y="10" width="92" height="24" rx="3" fill="#ff6b4a" />
+      <rect x="6" y="18" width="92" height="3" fill="rgba(255,255,255,.55)" />
+    </g>
+  </svg>
+);
+
 export const StickyArt = () => (
   <svg viewBox="0 0 132 132" aria-hidden="true">
     <ellipse className="shadow" cx="66" cy="124" rx="48" ry="5" />

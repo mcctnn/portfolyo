@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, Navigate, NavLink, useParams } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "./useAuth";
 import CrudList from "./CrudList";
+import MessagesList from "./MessagesList";
 import ProfileForm from "./ProfileForm";
+import Stats from "./Stats";
 import { lists, TABS } from "./configs";
 
 function LoginForm({ signIn }) {
@@ -52,6 +54,13 @@ function NotAdmin({ email, signOut }) {
 export default function Admin() {
   const { tab } = useParams();
   const { session, isAdmin, signIn, signOut } = useAuth();
+  const [unread, setUnread] = useState(0);
+
+  const loadUnread = useCallback(() => {
+    supabase.from("messages").select("id", { count: "exact", head: true }).eq("is_read", false)
+      .then(({ count }) => setUnread(count || 0));
+  }, []);
+  useEffect(() => { if (isAdmin) loadUnread(); }, [isAdmin, tab, loadUnread]);
 
   useEffect(() => {
     document.title = "Yönetim — portfolyo";
@@ -79,10 +88,18 @@ export default function Admin() {
     body = (
       <div className="admin-shell">
         <nav className="admin-nav" aria-label="Bölümler">
-          {TABS.map((t) => <NavLink key={t.path} to={`/admin/${t.path}`}>{t.label}</NavLink>)}
+          {TABS.map((t) => (
+            <NavLink key={t.path} to={`/admin/${t.path}`}>
+              {t.label}{t.path === "mesajlar" && unread > 0 && <span className="badge">{unread}</span>}
+            </NavLink>
+          ))}
         </nav>
         <div className="admin-content">
-          {tab === "profil" ? <ProfileForm /> : lists[tab] ? <CrudList key={tab} config={lists[tab]} /> : <Navigate to="/admin/profil" replace />}
+          {tab === "profil" ? <ProfileForm />
+            : tab === "mesajlar" ? <MessagesList onChange={loadUnread} />
+            : tab === "istatistik" ? <Stats />
+            : lists[tab] ? <CrudList key={tab} config={lists[tab]} />
+            : <Navigate to="/admin/profil" replace />}
         </div>
       </div>
     );

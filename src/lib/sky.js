@@ -47,8 +47,9 @@ export function cssVars(c) {
   };
 }
 
+/** Günün saatine göre karşılama anahtarı; metni i18n sözlüğünden gelir. */
 export const greetingFor = (h) =>
-  h >= 5 && h < 11 ? "Günaydın ☀️" : h >= 11 && h < 17 ? "Merhaba 👋" : h >= 17 && h < 22 ? "İyi akşamlar 🌆" : "Hâlâ uyanık mısın? 🌙";
+  h >= 5 && h < 11 ? "morning" : h >= 11 && h < 17 ? "day" : h >= 17 && h < 22 ? "evening" : "night";
 
 /** Güneş/ay yayı üzerindeki konumu: p 0..1 arası ilerleme. */
 export function orbit(p, fadeEdge = 8) {

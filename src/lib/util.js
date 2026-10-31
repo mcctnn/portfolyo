@@ -3,6 +3,7 @@ export const lerp = (a, b, t) => a + (b - a) * t;
 export const smooth = (t) => t * t * (3 - 2 * t);
 export const pad = (n) => String(n).padStart(2, "0");
 export const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+export const pickLine = (arr) => (arr && arr.length ? pick(arr) : "");
 
 /** Yönetici panelinden gelen bağlantılarda yalnızca güvenli protokollere izin verir. */
 export function safeHref(href) {

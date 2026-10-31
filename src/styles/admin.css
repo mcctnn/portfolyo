@@ -93,3 +93,32 @@
   .admin-nav { position: static; display: flex; overflow-x: auto; padding-bottom: 6px; }
   .admin-nav a { white-space: nowrap; }
 }
+
+/* ============ Mesajlar, istatistik, rozet ============ */
+.admin-nav .badge {
+  display: inline-grid; place-items: center; min-width: 22px; height: 22px; margin-left: 8px; padding: 0 6px;
+  border-radius: 999px; background: #ff6b4a; color: #fff; font-size: .75rem; font-weight: 800;
+}
+.admin-nav a.active .badge { background: #fff; color: #ff6b4a; }
+.row.msg.unread { border-color: var(--coral); background: #fff3ea; }
+.row.msg small { color: var(--a-soft); font-weight: 700; }
+.msg-body { margin: 6px 0 0; white-space: pre-wrap; word-break: break-word; }
+.row-actions .linkbtn {
+  padding: 6px 12px; border-radius: 10px; border: 2px solid var(--a-line); background: #fff; color: var(--a-ink);
+  font: 800 .85rem var(--f-body); text-decoration: none;
+}
+.row-actions .linkbtn:hover { border-color: var(--a-ink); }
+
+.stat-cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.stat-cards .stat { margin: 16px 0 0; display: grid; gap: 2px; }
+.stat b { font: 600 2rem var(--f-head); }
+.stat span { color: var(--a-soft); font-weight: 700; font-size: .9rem; }
+.bars { display: flex; align-items: flex-end; gap: 3px; height: 140px; padding-top: 6px; }
+.bar { flex: 1; height: 100%; display: flex; align-items: flex-end; }
+.bar i { display: block; width: 100%; min-height: 2px; border-radius: 4px 4px 0 0; background: var(--coral); }
+.bar:hover i { background: #2b2233; }
+.bars-axis { display: flex; justify-content: space-between; margin-top: 6px; color: var(--a-soft); font-size: .8rem; font-weight: 700; }
+.stat-cols { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.plain li { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 6px; border-bottom: 1px dashed var(--a-line); }
+.plain code { font: 600 .9rem ui-monospace, Consolas, monospace; word-break: break-all; }

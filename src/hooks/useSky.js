@@ -73,7 +73,7 @@ export function useSky() {
     hour: h,
     hh: Math.floor(m / 60),
     mm: Math.floor(m % 60),
-    greeting: greetingFor(h),
+    greetingKey: greetingFor(h),
     dark: palette.dark,
     sleeping: palette.dark > 0.85,
     lampOn,

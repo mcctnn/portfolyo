@@ -22,7 +22,7 @@ export function fromForm(fields, form) {
     if (f.type === "tags") out[f.key] = v.split(",").map((s) => s.trim()).filter(Boolean);
     else if (f.type === "lines") out[f.key] = v.split("\n").map((s) => s.trim()).filter(Boolean);
     else if (f.type === "bool") out[f.key] = !!v;
-    else out[f.key] = v.trim();
+    else out[f.key] = f.normalize ? f.normalize(v) : v.trim();
   }
   return out;
 }

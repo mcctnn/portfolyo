@@ -27,6 +27,7 @@ function RowForm({ config, initial, busy, onSave, onCancel }) {
 /** Bir tablodaki satırları listeler; ekleme, düzenleme, silme ve sıralama sağlar. */
 export default function CrudList({ config }) {
   const { table, title, noun, help, summary, detail } = config;
+  const sortable = config.sortable !== false;
   const { reload } = useContent();
   const [rows, setRows] = useState(null);
   const [editing, setEditing] = useState(null); // null | {} (yeni) | satır
@@ -34,10 +35,12 @@ export default function CrudList({ config }) {
   const [busy, setBusy] = useState(false);
 
   const load = useCallback(async () => {
-    const { data, error: err } = await supabase.from(table).select("*").order("sort_order").order("id");
+    let q = supabase.from(table).select("*");
+    for (const [col, opts] of config.order || [["sort_order", { ascending: true }]]) q = q.order(col, opts);
+    const { data, error: err } = await q.order("id");
     if (err) setError(err.message);
     else { setRows(data); setError(""); }
-  }, [table]);
+  }, [table, config]);
 
   useEffect(() => { setRows(null); setEditing(null); load(); }, [load]);
 
@@ -57,6 +60,7 @@ export default function CrudList({ config }) {
       if (editing?.id) {
         return (await supabase.from(table).update(values).eq("id", editing.id)).error;
       }
+      if (!sortable) return (await supabase.from(table).insert(values)).error;
       const next = rows.reduce((m, r) => Math.max(m, r.sort_order), 0) + 1;
       return (await supabase.from(table).insert({ ...values, sort_order: next })).error;
     });
@@ -108,8 +112,10 @@ export default function CrudList({ config }) {
                 {detail(r) && <span>{detail(r)}</span>}
               </div>
               <div className="row-actions">
-                <button type="button" title="Yukarı taşı" aria-label="Yukarı taşı" onClick={() => move(i, -1)} disabled={busy || i === 0}>↑</button>
-                <button type="button" title="Aşağı taşı" aria-label="Aşağı taşı" onClick={() => move(i, 1)} disabled={busy || i === rows.length - 1}>↓</button>
+                {sortable && <>
+                  <button type="button" title="Yukarı taşı" aria-label="Yukarı taşı" onClick={() => move(i, -1)} disabled={busy || i === 0}>↑</button>
+                  <button type="button" title="Aşağı taşı" aria-label="Aşağı taşı" onClick={() => move(i, 1)} disabled={busy || i === rows.length - 1}>↓</button>
+                </>}
                 <button type="button" onClick={() => setEditing(r)} disabled={busy}>Düzenle</button>
                 <button type="button" className="danger" onClick={() => remove(r)} disabled={busy}>Sil</button>
               </div>

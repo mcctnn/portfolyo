@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/spa-404.mjs",
+    "build": "vite build && node scripts/postbuild.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
