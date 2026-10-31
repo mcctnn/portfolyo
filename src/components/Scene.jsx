@@ -8,8 +8,11 @@ import { useToast } from "./Toast";
 import DeskItem from "./DeskItem";
 import { SECTIONS } from "./sections";
 import {
-  CatArt, LampArt, LaptopArt, MugArt, NotebookArt, PhoneArt, PlantArt, PolaroidArt, StickyArt,
+  CatArt, CvArt, LampArt, LaptopArt, MugArt, NotebookArt, PhoneArt, PlantArt, PolaroidArt, StickyArt,
 } from "./Art";
+
+const CV_FILE = "Mehmet-Can-Cetin-CV.pdf";
+const CV_URL = `${import.meta.env.BASE_URL}${CV_FILE}`;
 
 /* ---------- Duvar süsleri ---------- */
 
@@ -107,6 +110,15 @@ function Desk({ profile, sky, lampRef, placeGlow, resetSignal, onTidy }) {
       toast(sky.lampOn ? "Lamba kapandı" : "Lamba açıldı 💡");
       sky.toggleLamp();
     },
+    cv() {
+      const a = document.createElement("a");
+      a.href = CV_URL;
+      a.download = CV_FILE;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      toast("CV indiriliyor 📄");
+    },
     plant() {
       setWiggle(true);
       setTimeout(() => setWiggle(false), 800);
@@ -125,6 +137,9 @@ function Desk({ profile, sky, lampRef, placeGlow, resetSignal, onTidy }) {
         </DeskItem>
         <DeskItem {...common} open="projects" label="Laptop — Projelerim" tag="projelerim" pos={{ x: "34%", y: "30%", w: 24, r: "0deg", z: 8 }} onActivate={() => navigate("/projeler")}>
           <LaptopArt />
+        </DeskItem>
+        <DeskItem {...common} action="cv" label="CV'yi indir (PDF)" tag="cv indir" pos={{ x: "38.5%", y: "4%", w: 8.5, r: "3deg", z: 15 }} onActivate={actions.cv}>
+          <CvArt />
         </DeskItem>
         <DeskItem {...common} open="journey" label="Fotoğraf — Yolculuğum" tag="yolculuk" pos={{ x: "50.5%", y: "7%", w: 9.5, r: "7deg", z: 16 }} onActivate={() => navigate("/yolculuk")}>
           <PolaroidArt />
@@ -244,6 +259,7 @@ export default function Scene() {
           <div className="ctas">
             <Link className="btn primary" to="/projeler">Projelerime bak</Link>
             <Link className="btn ghost" to="/iletisim">Bana yaz</Link>
+            <a className="btn ghost" href={CV_URL} download={CV_FILE}>CV indir ↓</a>
           </div>
           <p className="hint" aria-hidden="true">
             aşağıdaki her şey tıklanıyor

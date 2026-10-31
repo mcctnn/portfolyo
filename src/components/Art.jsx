@@ -20,6 +20,23 @@ export const NotebookArt = () => (
   </svg>
 );
 
+export const CvArt = () => (
+  <svg viewBox="0 0 120 160" aria-hidden="true">
+    <ellipse className="shadow" cx="60" cy="154" rx="46" ry="5" />
+    <rect x="12" y="10" width="96" height="136" rx="4" fill="#fffdf6" stroke="#e7dcc7" />
+    <rect x="22" y="22" width="44" height="7" rx="3.5" fill="#2b2233" />
+    <rect x="22" y="34" width="28" height="4" rx="2" fill="#ff6b4a" />
+    <g fill="#d9cfbd">
+      <rect x="22" y="48" width="76" height="4" rx="2" /><rect x="22" y="57" width="68" height="4" rx="2" />
+      <rect x="22" y="66" width="74" height="4" rx="2" /><rect x="22" y="80" width="40" height="4" rx="2" />
+      <rect x="22" y="89" width="72" height="4" rx="2" /><rect x="22" y="98" width="62" height="4" rx="2" />
+    </g>
+    <circle cx="84" cy="124" r="14" fill="#ff6b4a" />
+    <path d="M84 116v14M78 125l6 6 6-6" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M92 6V26a5 5 0 0 1-10 0V10" fill="none" stroke="#8d8aa3" strokeWidth="3" strokeLinecap="round" />
+  </svg>
+);
+
 export const StickyArt = () => (
   <svg viewBox="0 0 132 132" aria-hidden="true">
     <ellipse className="shadow" cx="66" cy="124" rx="48" ry="5" />
