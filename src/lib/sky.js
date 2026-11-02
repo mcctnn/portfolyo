@@ -3,7 +3,16 @@ import { clamp, lerp, smooth } from "./util";
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const rgb = (c) => `rgb(${c.map((v) => Math.round(v)).join(",")})`;
 const mix = (a, b, t) => a.map((v, i) => lerp(v, b[i], t));
-const luminance = ([r, g, b]) => (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+
+// WCAG göreli parlaklık ve kontrast oranı (yazı okunabilirliği için)
+const lin = (v) => { const s = v / 255; return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4; };
+const relLum = ([r, g, b]) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+const contrast = (a, b) => {
+  const x = relLum(a), y = relLum(b);
+  return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+};
+const OVERLAY = [12, 8, 34]; // .scene::after: geceleri hem zemini hem metni karartan katman
+const MIN_CONTRAST = 4.5;
 
 const P = (skyTop, skyBot, wall, wallDeep, desk, deskDark, dark) => ({
   skyTop: hex(skyTop), skyBot: hex(skyBot), wall: hex(wall), wallDeep: hex(wallDeep),
@@ -31,9 +40,41 @@ export function sample(h) {
   return out;
 }
 
-/** Paletten CSS değişkenleri üretir. Duvar açıksa koyu, karanlıksa açık yazı rengi seçilir. */
+/**
+ * Paletten CSS değişkenleri üretir.
+ * Yazı rengi, koyu ve açık adaydan duvarla kontrastı yüksek olanı seçilerek belirlenir; gerekirse
+ * kontrast 4.5:1'e kadar itilir. (Eskiden iki renk arasında ara tonlardan geçiliyordu; akşam duvar
+ * orta tondayken yazı neredeyse görünmez oluyordu.)
+ */
 export function cssVars(c) {
-  const t = smooth(clamp((luminance(c.wall) - 0.5) / 0.16, 0, 1));
+  const alpha = c.dark * 0.32;
+  const shade = (col) => mix(col, OVERLAY, alpha);
+  const bgs = [shade(c.wall), shade(c.wallDeep)];
+  const worst = (fg) => Math.min(...bgs.map((bg) => contrast(shade(fg), bg)));
+
+  // Hedef kontrasta ulaşana kadar rengi uca (siyaha ya da beyaza) doğru iter
+  const push = (fg, target, min) => {
+    let color = fg;
+    for (let t = 0; worst(color) < min && t < 1; ) { t += 0.05; color = mix(fg, target, t); }
+    return color;
+  };
+  const dark = {
+    ink: push(hex("#241a2c"), [0, 0, 0], 7),
+    soft: push(hex("#5a4b60"), [0, 0, 0], MIN_CONTRAST),
+    accent: push(hex("#ff6b4a"), [40, 6, 0], MIN_CONTRAST),
+  };
+  const light = {
+    ink: push(hex("#f8f4ff"), [255, 255, 255], 7),
+    soft: push(hex("#d4cbea"), [255, 255, 255], MIN_CONTRAST),
+    accent: push(hex("#ff6b4a"), [255, 235, 228], MIN_CONTRAST),
+  };
+  // İki yönden hangisinin metni daha okunur kıldığına bakılır (orta tonlu duvarda da en iyisi seçilir)
+  const score = (set) => Math.min(worst(set.ink), worst(set.soft));
+  const useDark = score(dark) >= score(light);
+  const { ink, soft, accent } = useDark ? dark : light;
+  // Yazının etrafına, yazı renginin tersi yumuşak bir hale: orta tonlu duvarda okunurluğu korur
+  const halo = useDark ? "rgba(255, 248, 236, .65)" : "rgba(12, 8, 34, .6)";
+
   return {
     "--sky-top": rgb(c.skyTop),
     "--sky-bot": rgb(c.skyBot),
@@ -42,8 +83,10 @@ export function cssVars(c) {
     "--desk": rgb(c.desk),
     "--desk-dark": rgb(c.deskDark),
     "--dark": c.dark.toFixed(3),
-    "--ink": rgb(mix(hex("#f4eeff"), hex("#2b2233"), t)),
-    "--ink-soft": rgb(mix(hex("#cdc3e6"), hex("#6a5b6e"), t)),
+    "--ink": rgb(ink),
+    "--ink-soft": rgb(soft),
+    "--accent": rgb(accent),
+    "--halo": halo,
   };
 }
 

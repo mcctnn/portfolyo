@@ -17,6 +17,8 @@
   --desk-dark: #9a6a42;
   --ink: #2b2233;
   --ink-soft: #6a5b6e;
+  --accent: #c2431f;
+  --halo: rgba(255, 248, 236, .65);
   --dark: 0;
 
   --f-head: "Fredoka", system-ui, sans-serif;
@@ -150,7 +152,12 @@ button { font: inherit; color: inherit; }
 
 /* Hero */
 .hero { position: relative; z-index: 2; max-width: 640px; }
-.eyebrow { margin: 0 0 4px; font: 700 clamp(1.5rem, 2.6vw, 2rem)/1 var(--f-hand); color: var(--coral); }
+/* Yazı renkleri (--ink, --ink-soft, --accent) saate göre script tarafından kontrasta bakılarak seçilir;
+   koyu/açık arasında geçerken ani sıçrama olmasın diye renkler yumuşakça değişir. */
+.hero h1, .hero p, .hero .name, .eyebrow, .typed, .typed-line, .intro, .hint, .logo, .btn.ghost { transition: color .5s; }
+.hero, .logo { text-shadow: 0 0 .55em var(--halo), 0 1px 1px var(--halo); }
+.hero .btn { text-shadow: none; }
+.eyebrow { margin: 0 0 4px; font: 700 clamp(1.5rem, 2.6vw, 2rem)/1 var(--f-hand); color: var(--accent); }
 .hero h1 {
   margin: 0;
   font: 600 clamp(2.3rem, 5.2vw, 4.4rem)/1.05 var(--f-head);
@@ -158,11 +165,12 @@ button { font: inherit; color: inherit; }
   color: var(--ink);
 }
 .name {
-  background: linear-gradient(transparent 60%, rgba(255, 200, 87, .6) 60% 92%, transparent 92%);
+  /* geceleri açık yazının altında parlak sarı şerit okunurluğu bozar, bu yüzden soluklaşır */
+  background: linear-gradient(transparent 60%, rgba(255, 200, 87, calc(.6 - var(--dark) * .4)) 60% 92%, transparent 92%);
   padding: 0 .12em; margin: 0 -.12em;
 }
 .typed-line { margin: 16px 0 0; font: 700 clamp(1.05rem, 1.7vw, 1.3rem)/1.3 var(--f-body); color: var(--ink); }
-.typed { color: var(--coral); }
+.typed { color: var(--accent); }
 .caret { display: inline-block; width: 3px; height: 1.1em; margin-left: 3px; vertical-align: -.18em; background: var(--coral); animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 .intro { margin: 14px 0 0; max-width: 46ch; font-size: 1.05rem; color: var(--ink-soft); }
